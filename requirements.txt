@@ -2,3 +2,6 @@ torch
 transformers
 accelerate
 numpy
+datasets
+tqdm
+scikit-learn
