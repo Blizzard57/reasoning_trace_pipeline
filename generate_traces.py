@@ -136,7 +136,10 @@ def _gen_torch(model, tok, prompt: str, max_new_tokens: int,
             temperature=temperature if do_sample else 1.0,
             top_p=top_p if do_sample else 1.0,
             do_sample=do_sample, pad_token_id=tok.eos_token_id)
-    return tok.decode(out[0], skip_special_tokens=True)
+    # Adding this to remove special tokens and clean up the output for deepseek
+    decoded_text = tok.decode(out[0], skip_special_tokens=True)
+    decoded_text = decoded_text.replace("Ġ", " ").replace("Ċ", "\n")
+    return decoded_text
 
 
 def _gen_mlx(mlx_model, mlx_tokenizer, prompt: str, max_new_tokens: int,
