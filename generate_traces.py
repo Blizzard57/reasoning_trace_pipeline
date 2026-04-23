@@ -145,11 +145,13 @@ def _gen_mlx(mlx_model, mlx_tokenizer, prompt: str, max_new_tokens: int,
     try:
         from mlx_lm.sample_utils import make_sampler
         sampler = make_sampler(temp=temperature, top_p=top_p)
+        # ADDED verbose=True HERE
         return generate(mlx_model, mlx_tokenizer, prompt=prompt,
-                        max_tokens=max_new_tokens, sampler=sampler)
+                        max_tokens=max_new_tokens, sampler=sampler, verbose=True) 
     except ImportError:
+        # ADDED verbose=True HERE
         return generate(mlx_model, mlx_tokenizer, prompt=prompt,
-                        max_tokens=max_new_tokens)
+                        max_tokens=max_new_tokens, verbose=True)
 
 # ── CLI ──────────────────────────────────────────────────────────────────────
 
